@@ -10,15 +10,17 @@ import {
 } from "react-native";
 
 export default function App() {
-  const [todo, setTodo] = useState("");
-  const [id, setID] = useState(0);
+  const [id, setID] = useState(2);
+  const [getName, setGetName] = useState("");
   const [name, setName] = useState("");
   const [job, setJob] = useState("");
 
   const fetchTodo = () => {
-    fetch("https://jsonplaceholder.typicode.com/todos/1")
+    fetch(`https://reqres.in/api/users/${id}`)
       .then((response) => response.json())
-      .then((json) => setTodo(json.title));
+      .then((json) =>
+        setGetName(json.data.first_name + " " + json.data.last_name)
+      );
   };
 
   const postTodo = () => {
@@ -44,9 +46,14 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>GET method!</Text>
+      <TextInput
+        placeholder="ID"
+        style={styles.input}
+        value={id}
+        onChangeText={setID}
+      />
       <Button title="Fetch" onPress={fetchTodo} color="#841584" />
-      <Text style={styles.button}>{todo}</Text>
-      <Text>{id}</Text>
+      <Text>Name: {getName}</Text>
       <Text style={styles.header}>POST method!</Text>
       <TextInput
         placeholder="Name"
@@ -70,7 +77,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 20,
     fontWeight: "bold",
-    color: 'blue',
+    color: "blue",
   },
   container: {
     flex: 1,
