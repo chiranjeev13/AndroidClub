@@ -75,6 +75,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      {showMethod === null && <Text style={styles.header}>API</Text>}
       {showMethod === "GET" && (
         <View style={styles.methodContainer}>
           <Text style={styles.header}>GET method!</Text>
