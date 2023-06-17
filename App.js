@@ -1,15 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-} from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 
 export default function App() {
   const [todo, setTodo] = useState("");
-  const [id, setID] = useState(0);
+  // const [id, setID] = useState(0);
+  const [name, setName] = useState("");
 
   // useEffect(async () => {
   //   await fetch("https://jsonplaceholder.typicode.com/todos/1")
@@ -18,17 +14,20 @@ export default function App() {
   // });
 
   const fetchTodo = () => {
-    fetch("https://jsonplaceholder.typicode.com/todos/1")
+    fetch("https://reqres.in/api/users/2")
       .then((response) => response.json())
-      .then((json) => setTodo(json.title));
+      .then((json) => {
+        setName(json.data.first_name);
+        console.log(json);
+      });
   };
 
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>GET Method</Text>
       <Button title="Fetch" onPress={fetchTodo} color="#841584" />
       <Text style={styles.button}>{todo}</Text>
-      <Text>{id}</Text>
+      <Text>Name: {name}</Text>
       <StatusBar style="auto" />
     </View>
   );
