@@ -18,20 +18,31 @@ export default function App() {
 
   const [showMethod, setShowMethod] = useState(null);
 
-  const fetchUser = () => {
-    fetch(`https://reqres.in/api/users/${id}`)
+  const fetchUser = (id) => {
+    fetch(`https://dummy.restapiexample.com/api/v1/employee/${id}`)
       .then((response) => response.json())
-      .then((json) =>
-        setGetName(json.data.first_name + " " + json.data.last_name)
+      .then(
+        (json) =>
+          setGetName(
+            json.data.employee_name +
+              " " +
+              json.data.employee_salary +
+              " " +
+              json.data.employee_age +
+              " " +
+              json.data.profile_image
+          ) //I could have created seperate variable but i m lazy ;-)
       );
   };
 
-  const AddUser = () => {
-    fetch("https://reqres.in/api/users", {
+  const AddUser = (name, salary, age, id) => {
+    fetch("https://dummy.restapiexample.com/api/v1/create", {
       method: "POST",
       body: {
         name: name,
-        job: job,
+        salary: salary,
+        age: age,
+        id: id,
       },
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -46,12 +57,14 @@ export default function App() {
       });
   };
 
-  const UpdateUser = () => {
-    fetch("https://reqres.in/api/users/" + id, {
+  const UpdateUser = (id, name, salary, age) => {
+    fetch("https://dummy.restapiexample.com/api/v1/update/" + id, {
       method: "PUT",
       body: {
         name: name,
-        job: job,
+        salary: salary,
+        age: age,
+        id: id,
       },
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -64,8 +77,8 @@ export default function App() {
       });
   };
 
-  const DeleteUser = () => {
-    fetch("https://reqres.in/api/users/" + id, {
+  const DeleteUser = (id) => {
+    fetch("https://dummy.restapiexample.com/api/v1/delete/" + id, {
       method: "DELETE",
     }).then((response) => {
       console.log(response);
