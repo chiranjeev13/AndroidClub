@@ -11,10 +11,11 @@ import {
 } from "react-native";
 
 export default function App() {
-  const [id, setID] = useState(2);
+  const [id, setID] = useState(69);
   const [getName, setGetName] = useState("");
   const [name, setName] = useState("");
-  const [job, setJob] = useState("");
+  const [salary, setSalary] = useState("");
+  const [age, setAge] = useState("");
 
   const [showMethod, setShowMethod] = useState(null);
 
@@ -101,7 +102,7 @@ export default function App() {
           <Button
             title="Fetch"
             style={styles.button}
-            onPress={fetchUser}
+            onPress={fetchUser(2)}
             color="#6EB4D5"
           />
           <Text>Name: {getName}</Text>
@@ -117,15 +118,22 @@ export default function App() {
             onChangeText={setName}
           />
           <TextInput
-            placeholder="Job"
+            placeholder="Salary"
             style={styles.input}
-            value={job}
-            onChangeText={setJob}
+            value={salary}
+            onChangeText={setSalary}
           />
+          <TextInput
+            placeholder="Age"
+            style={styles.input}
+            value={age}
+            onChangeText={setAge}
+          />
+
           <Button
             title="Post"
             style={styles.button}
-            onPress={AddUser}
+            onPress={AddUser(name, salary, age, id)}
             color="#6EB4D5"
           />
         </View>
